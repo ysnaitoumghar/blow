@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <title>Blow</title>
+    <meta name="description" content="Type a word. It becomes thousands of glowing particles you can touch, tilt, shake and blow away." />
+    <meta name="theme-color" content="#05060a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Blow" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta property="og:title" content="Blow" />
+    <meta property="og:description" content="Type a word. Tap, tilt and blow." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="manifest" href={`${base}/manifest.webmanifest`} />
+  </head>
+  <body>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <button id="lang" class="chip" type="button" data-i18n-label="language">EN</button>
+
+    <main id="start" class="start">
+      <div class="panel">
+        <p id="startLine" class="line" data-i18n="tagline"></p>
+        <button id="startBtn" class="cta" type="button" data-i18n="start"></button>
+        <p class="fine" data-i18n="privacy"></p>
+      </div>
+    </main>
+
+    <p id="hint" class="hint" aria-hidden="true"></p>
+
+    <nav id="dock" class="dock" hidden>
+      <button id="bText" class="round" type="button" data-i18n-label="text">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7V5h14v2M12 5v14M9 19h6" /></svg>
+      </button>
+      <button id="bTheme" class="round" type="button" data-i18n-label="theme">
+        <span id="swatch" class="swatch"></span>
+      </button>
+      <button id="bShare" class="round" type="button" data-i18n-label="share">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4M7 11H6a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1" /></svg>
+      </button>
+      <button id="bShot" class="round" type="button" data-i18n-label="capture">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-2h6l2 2h3v11H4z" /><circle cx="12" cy="13" r="3.5" /></svg>
+      </button>
+      <button id="bBlow" class="round sim" type="button" data-i18n-label="blow" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h10a3 3 0 1 0-3-3M3 14h14a3 3 0 1 1-3 3M3 19h6" /></svg>
+      </button>
+      <button id="bShake" class="round sim" type="button" data-i18n-label="shake" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h12M12 4l4 4-4 4M20 16H8M12 12l-4 4 4 4" /></svg>
+      </button>
+    </nav>
+
+    <form id="sheet" class="sheet" hidden autocomplete="off">
+      <input
+        id="word"
+        type="text"
+        maxlength="20"
+        enterkeyhint="done"
+        autocapitalize="sentences"
+        autocorrect="off"
+        spellcheck="false"
+        dir="auto"
+        data-i18n-ph="placeholder"
+        data-i18n-label="text"
+      />
+      <button class="pill" type="submit" data-i18n="done"></button>
+    </form>
+
+    <div id="shot" class="shot" hidden>
+      <img id="shotImg" alt="" />
+      <div class="row">
+        <button id="shotSave" class="pill solid" type="button" data-i18n="save"></button>
+        <button id="shotClose" class="pill" type="button" data-i18n="close"></button>
+      </div>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>
